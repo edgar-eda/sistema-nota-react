@@ -75,12 +75,14 @@ export default function Login() {
             <i className="bi bi-box-arrow-in-right me-2"></i>Entrar
           </button>
         </form>
-
-        <div className="text-center mt-3 small">
-          <a href="#" className="text-decoration-none">Esqueci minha senha</a> |
-          <a href="#" className="text-decoration-none">Fazer cadastro</a>
-        </div>
+          <footer class="text-center text-muted py-3">
+          <small>Desenvolvido por Edgar Tavares</small>
+        </footer>
+       
       </div>
+      
     </div>
+
+    
   );
 }
