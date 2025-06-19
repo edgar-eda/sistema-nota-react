@@ -1,8 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/config";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const UserPanel = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      alert("Erro ao sair: " + error.message);
+    }
+  };
+
   return (
     <div className="bg-gradient min-vh-100">
       {/* Header */}
@@ -10,16 +24,16 @@ const UserPanel = () => {
         <h5 className="mb-0">
           <i className="bi bi-wallet2 me-2"></i>Prestação de Contas - Usuário
         </h5>
-        <button className="btn btn-outline-danger btn-sm" onClick={() => alert("Função sair em breve")}>
-          Sair
+        <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
+          <i className="bi bi-box-arrow-right me-1"></i> Sair
         </button>
       </header>
 
+      {/* Conteúdo */}
       <main className="container">
         <div className="row">
-          {/* Saldo + Avisos */}
+          {/* Coluna do saldo + avisos */}
           <div className="col-md-6 mb-4 d-flex flex-column gap-3">
-            {/* Saldo */}
             <div className="card shadow-sm p-3 bg-light position-relative border-success">
               <i
                 className="bi bi-wallet2 text-success position-absolute"
@@ -32,7 +46,6 @@ const UserPanel = () => {
               <small className="text-muted">Aguardando crédito...</small>
             </div>
 
-            {/* Avisos */}
             <div className="card shadow-sm p-3">
               <h6 className="mb-3">
                 <i className="bi bi-megaphone-fill me-2"></i>Últimas Aprovações
@@ -63,7 +76,7 @@ const UserPanel = () => {
             </div>
           </div>
 
-          {/* Registrar Despesa */}
+          {/* Card Registrar Despesa */}
           <div className="col-md-6 mb-4">
             <div className="card shadow-sm p-3 h-100">
               <h5 className="mb-3">
@@ -89,9 +102,7 @@ const UserPanel = () => {
                 <div className="mb-3">
                   <label className="form-label">Categoria</label>
                   <select className="form-select" required>
-                    <option selected disabled value="">
-                      Escolha...
-                    </option>
+                    <option selected disabled value="">Escolha...</option>
                     <option value="Material">Material</option>
                     <option value="Serviço">Serviço</option>
                     <option value="Transporte">Transporte</option>
@@ -123,6 +134,7 @@ const UserPanel = () => {
               </button>
             </div>
           </div>
+
           <div className="table-responsive">
             <table className="table table-hover align-middle">
               <thead className="table-light">
@@ -148,6 +160,7 @@ const UserPanel = () => {
         </div>
       </main>
 
+      {/* Footer */}
       <footer className="text-center text-muted py-3">
         <small>Desenvolvido por Edgar Tavares</small>
       </footer>

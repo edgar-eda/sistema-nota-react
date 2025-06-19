@@ -8,13 +8,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const AdminPanel = () => {
+  const navigate = useNavigate();
+  
+    const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        navigate("/");
+      } catch (error) {
+        alert("Erro ao sair: " + error.message);
+      }
+    };
   return (
     <div className="bg-gradient min-vh-100">
       {/* Header */}
       <header className="bg-white shadow-sm p-3 mb-4 d-flex justify-content-between align-items-center">
         <h5 className="mb-0">Painel do Administrador</h5>
-        <button className="btn btn-outline-danger btn-sm" onClick={() => alert("Sair do sistema")}>
-          Sair
+        <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
+          <i className="bi bi-box-arrow-right me-1"></i> Sair
         </button>
       </header>
 
@@ -142,6 +152,7 @@ const AdminPanel = () => {
                   <th>Usuário</th>
                   <th>Data</th>
                   <th>Valor</th>
+                  <th>Descrição</th>
                   <th>Status</th>
                   <th className="text-end">Ações</th>
                 </tr>
@@ -162,6 +173,7 @@ const AdminPanel = () => {
                   </td>
                   <td>15/06/2024</td>
                   <td>R$ 450,00</td>
+                  <td>Reembolso de despesas de viagem</td>
                   <td>
                     <span className="badge bg-warning text-dark">
                       <i className="bi bi-hourglass me-1"></i>Pendente
@@ -194,6 +206,7 @@ const AdminPanel = () => {
                   </td>
                   <td>14/06/2024</td>
                   <td>R$ 1.200,00</td>
+                  <td>Pagamento de fornecedor</td>
                   <td>
                     <span className="badge bg-warning text-dark">
                       <i className="bi bi-hourglass me-1"></i>Pendente
