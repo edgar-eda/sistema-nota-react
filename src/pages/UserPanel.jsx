@@ -1,3 +1,4 @@
+//src/pages/UserPanel.jsx essa é a tela de usuario
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -21,13 +22,18 @@ const UserPanel = () => {
     <div className="bg-gradient min-vh-100">
       {/* Header */}
       <header className="bg-white shadow-sm p-3 mb-4 d-flex justify-content-between align-items-center">
-        <h5 className="mb-0">
-          <i className="bi bi-wallet2 me-2"></i>Prestação de Contas - Usuário
-        </h5>
-        <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
-          <i className="bi bi-box-arrow-right me-1"></i> Sair
-        </button>
-      </header>
+      <h5 className="mb-0">
+      <i className="bi bi-wallet2 me-2"></i>
+      Prestação de Contas - {localStorage.getItem("nomeUsuario")}
+      </h5>
+      <button className="btn btn-outline-danger btn-sm" onClick={() => {
+       localStorage.clear();
+      window.location.href = "/";
+  }}>
+    Sair
+  </button>
+</header>
+
 
       {/* Conteúdo */}
       <main className="container">

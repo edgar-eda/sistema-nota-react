@@ -1,4 +1,4 @@
-// src/pages/AdminPanel.jsx
+// src/pages/AdminPanel.jsx essa é a tela Administader 
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,11 +22,14 @@ const AdminPanel = () => {
     <div className="bg-gradient min-vh-100">
       {/* Header */}
       <header className="bg-white shadow-sm p-3 mb-4 d-flex justify-content-between align-items-center">
-        <h5 className="mb-0">Painel do Administrador</h5>
-        <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
-          <i className="bi bi-box-arrow-right me-1"></i> Sair
-        </button>
-      </header>
+      <h5 className="mb-0">Painel do Administrador - {localStorage.getItem("nomeUsuario")}</h5>
+      <button className="btn btn-outline-danger btn-sm" onClick={() => {
+        localStorage.clear();
+        window.location.href = "/";
+  }}>
+    Sair
+  </button>
+</header>
 
       {/* Container principal */}
       <div className="container mb-4">

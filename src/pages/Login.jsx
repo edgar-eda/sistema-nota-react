@@ -15,21 +15,28 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-      const user = userCredential.user;
+  e.preventDefault();
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+    const user = userCredential.user;
 
-      // Redirecionar para painel com base no email (exemplo: admin@... vai para admin)
-      if (user.email === "admin@admin.com") {
-        navigate("/admin");
-      } else {
-        navigate("/usuario");
-      }
-    } catch (error) {
-      alert("Erro ao fazer login: " + error.message);
+    // Extrair nome antes do @ e colocar a primeira letra maiúscula
+    const nomeEmail = user.email.split("@")[0];
+    const nomeFormatado = nomeEmail.charAt(0).toUpperCase() + nomeEmail.slice(1);
+    localStorage.setItem("nomeUsuario", nomeFormatado);
+
+    // Redirecionar para painel com base no email
+    if (user.email === "admin@admin.com") {
+      navigate("/admin");
+    } else {
+      navigate("/usuario");
     }
-  };
+
+  } catch (error) {
+    alert("Erro ao fazer login: " + error.message);
+  }
+};
+
 
   return (
     <div className="container d-flex vh-100 justify-content-center align-items-center bg-light">
